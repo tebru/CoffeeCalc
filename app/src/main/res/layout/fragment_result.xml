@@ -1,0 +1,70 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.tebru.coffeecalculator.lifecycle.fragment.ResultFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/no_results_found"
+        android:id="@+id/no_results_found"
+        android:layout_gravity="start|top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/coffee_amount_label"
+        android:id="@+id/coffee_amount_label"
+        android:layout_gravity="start|top"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/coffee_amount_result"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="@dimen/coffee_amount_margin_top"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/bloom_amount_label"
+        android:id="@+id/bloom_amount_label"
+        android:layout_gravity="start|top"
+        android:layout_marginTop="@dimen/bloom_amount_label_margin_top"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/bloom_amount_result"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="@dimen/bloom_amount_margin_top"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/water_amount_label"
+        android:id="@+id/water_amount_label"
+        android:layout_gravity="start|top"
+        android:layout_marginTop="@dimen/water_amount_label_margin_top"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/water_amount_result"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="@dimen/water_amount_margin_top"
+        android:visibility="invisible" />
+
+</FrameLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Coffee Calc</string>
+    <string name="action_settings">Settings</string>
+    <string name="amount_of_coffee">Amount of coffee in ounces</string>
+    <string name="title_activity_calculate">Coffee Calc</string>
+    <string name="coffee_amount_label">Coffee:</string>
+    <string name="bloom_amount_label">Bloom:</string>
+    <string name="water_amount_label">Water:</string>
+    <string name="no_results_found">Please enter the amount of coffee you wish to make above.</string>
+
+</resources>
