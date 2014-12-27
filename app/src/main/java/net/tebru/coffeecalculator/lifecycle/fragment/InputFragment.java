@@ -1,6 +1,5 @@
 package net.tebru.coffeecalculator.lifecycle.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +12,6 @@ import com.squareup.otto.Bus;
 
 import net.tebru.coffeecalculator.R;
 import net.tebru.coffeecalculator.event.InputTextChangedEvent;
-import net.tebru.coffeecalculator.lifecycle.app.CoffeeApp;
 
 import javax.inject.Inject;
 
@@ -22,25 +20,12 @@ import javax.inject.Inject;
  *
  * Handles actions/rending of the input box
  */
-public class InputFragment extends Fragment implements TextWatcher {
+public class InputFragment extends InjectableFragment implements TextWatcher {
 
     /**
      * An Otto event bus
      */
     @Inject Bus eventBus;
-
-    /**
-     * Add to object graph
-     *
-     * {@inheritDoc}
-     */
-    @Override public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // inject the fragment
-        CoffeeApp app = (CoffeeApp) this.getActivity().getApplication();
-        app.inject(this);
-    }
 
     /**
      * {@inheritDoc}

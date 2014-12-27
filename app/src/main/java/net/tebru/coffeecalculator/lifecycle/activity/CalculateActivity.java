@@ -1,17 +1,37 @@
 package net.tebru.coffeecalculator.lifecycle.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import net.tebru.coffeecalculator.R;
+
+import dagger.ObjectGraph;
 
 /**
  * Class CalculateActivity
  *
  * The main activity
  */
-public class CalculateActivity extends Activity {
+public class CalculateActivity extends InjectableActivity {
+
+    /**
+     * The dagger object graph for activity
+     */
+    private ObjectGraph activityGraph;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override protected ObjectGraph getActivityGraph() {
+        return this.activityGraph;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override protected void setActivityGraph(ObjectGraph activityGraph) {
+        this.activityGraph = activityGraph;
+    }
 
     /**
      * {@inheritDoc}

@@ -3,9 +3,6 @@ package net.tebru.coffeecalculator.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 /**
  * Class Coffee Calculator
  *
@@ -39,7 +36,7 @@ import javax.inject.Singleton;
  *
  *     To solve fo coffee or water
  */
-@Singleton public class CoffeeCalculator {
+public class CoffeeCalculator {
     /**
      * The ratio of water to grounds
      */
@@ -75,11 +72,6 @@ import javax.inject.Singleton;
      * The amount of coffee we should make in ounces
      */
     private double targetYield;
-
-    /**
-     * Constructor
-     */
-    @Inject public CoffeeCalculator() {}
 
     /**
      * Set the amount of coffee we should make in ounces

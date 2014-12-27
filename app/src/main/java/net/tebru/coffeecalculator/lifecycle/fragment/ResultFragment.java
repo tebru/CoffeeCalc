@@ -1,6 +1,5 @@
 package net.tebru.coffeecalculator.lifecycle.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +12,15 @@ import com.squareup.otto.Subscribe;
 import net.tebru.coffeecalculator.R;
 import net.tebru.coffeecalculator.domain.CoffeeCalculator;
 import net.tebru.coffeecalculator.event.InputTextChangedEvent;
-import net.tebru.coffeecalculator.lifecycle.app.CoffeeApp;
 
 import javax.inject.Inject;
 
-public class ResultFragment extends Fragment {
+/**
+ * Class ResultFragment
+ *
+ * Displays calculations
+ */
+public class ResultFragment extends InjectableFragment {
 
     /**
      * An Otto event bus
@@ -33,19 +36,6 @@ public class ResultFragment extends Fragment {
      * Whether calculations should be displayed
      */
     private boolean resultsVisible = false;
-
-    /**
-     * Add to object graph
-     *
-     * {@inheritDoc}
-     */
-    @Override public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // inject the fragment
-        CoffeeApp app = (CoffeeApp) this.getActivity().getApplication();
-        app.inject(this);
-    }
 
     /**
      * {@inheritDoc}
@@ -73,11 +63,7 @@ public class ResultFragment extends Fragment {
             return;
         }
 
-        boolean resultsVisible = savedInstanceState.getBoolean("resultsVisible");
-
-        if (true == resultsVisible) {
-            this.enableResults(view);
-        }
+        this.resultsVisible = savedInstanceState.getBoolean("resultsVisible");
     }
 
 
@@ -90,6 +76,11 @@ public class ResultFragment extends Fragment {
         super.onResume();
 
         eventBus.register(this);
+
+        // if we should show results, display them
+        if (true == this.resultsVisible) {
+            this.enableResults();
+        }
     }
 
     /**
@@ -121,30 +112,31 @@ public class ResultFragment extends Fragment {
      */
     @Subscribe public void updateView(InputTextChangedEvent event) {
         String text = event.getInputText();
-        View view = this.getView();
 
         double amount;
         try {
             amount = Double.parseDouble(text);
         } catch (NumberFormatException exception) {
             // input is currently unprocessable, set default message
-            this.disableResults(view);
+            this.disableResults();
 
             return;
         }
 
         this.calculator.setTargetYield(amount);
-        this.enableResults(view);
+        this.enableResults();
     }
 
     /**
      * Toggles results off and displays message
      *
-     * @param view View
+     * @throws UnsupportedOperationException
      */
-    private void disableResults(View view) {
-        if (!this.resultsVisible) {
-            return;
+    private void disableResults() throws UnsupportedOperationException {
+        View view = this.getView();
+
+        if (null == view) {
+            throw new UnsupportedOperationException("View not found, must be available before disableResults() is called");
         }
 
         view.findViewById(R.id.coffee_amount_label).setVisibility(View.INVISIBLE);
@@ -161,9 +153,15 @@ public class ResultFragment extends Fragment {
     /**
      * Toggles results on and hides message
      *
-     * @param view View
+     * @throws UnsupportedOperationException
      */
-    private void enableResults(View view) {
+    private void enableResults() throws UnsupportedOperationException {
+        View view = this.getView();
+
+        if (null == view) {
+            throw new UnsupportedOperationException("View not found, must be available before enableResults() is called");
+        }
+
         TextView coffeeAmount = (TextView) view.findViewById(R.id.coffee_amount_result);
         TextView bloomAmount = (TextView) view.findViewById(R.id.bloom_amount_result);
         TextView waterAmount = (TextView) view.findViewById(R.id.water_amount_result);
@@ -171,10 +169,6 @@ public class ResultFragment extends Fragment {
         coffeeAmount.setText(this.calculator.getCoffeeAmount().toString() + 'g');
         bloomAmount.setText(this.calculator.getBloomAmount().toString() + 'g');
         waterAmount.setText(this.calculator.getWaterAmount().toString() + 'g');
-
-        if (this.resultsVisible) {
-            return;
-        }
 
         view.findViewById(R.id.coffee_amount_label).setVisibility(View.VISIBLE);
         view.findViewById(R.id.bloom_amount_label).setVisibility(View.VISIBLE);

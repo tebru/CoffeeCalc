@@ -30,11 +30,12 @@ public class CoffeeApp extends Application {
     }
 
     /**
-     * Inject an object
+     * Get the application object graph
      *
-     * @param object The object to inject
+     * @return The application object graph
      */
-    public void inject(Object object) {
-        this.objectGraph.inject(object);
+    public ObjectGraph getApplicationGraph()
+    {
+        return this.objectGraph;
     }
 }
